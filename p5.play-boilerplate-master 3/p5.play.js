@@ -825,11 +825,11 @@ p5.prototype.spriteUpdate = true;
    * A Sprite can have a collider that defines the active area to detect
    * collisions or overlappings with other sprites and mouse interactions.
    *
-   * Sprites created using createSprite (the preferred way) are added to the
+   * Sprites created using new  Rectangle (the preferred way) are added to the
    * allSprites group and given a depth value that puts it in front of all
    * other sprites.
    *
-   * @method createSprite
+   * @method new  Rectangle
    * @param {Number} x Initial x coordinate
    * @param {Number} y Initial y coordinate
    * @param {Number} width Width of the placeholder rectangle and of the
@@ -839,7 +839,7 @@ p5.prototype.spriteUpdate = true;
    * @return {Object} The new sprite instance
    */
 
-p5.prototype.createSprite = function(x, y, width, height) {
+p5.prototype.newRectangle = function(x, y, width, height) {
   var s = new Sprite(this, x, y, width, height);
   s.depth = this.allSprites.maxDepth()+1;
   this.allSprites.add(s);
@@ -1419,7 +1419,7 @@ deltaTime = ((now - then) / 1000)/INTERVAL_60; // seconds since last frame
    * collisions or overlappings with other sprites and mouse interactions.
    *
    * To create a Sprite, use
-   * {{#crossLink "p5.play/createSprite:method"}}{{/crossLink}}.
+   * {{#crossLink "p5.play/new  Rectangle:method"}}{{/crossLink}}.
    *
    * @class Sprite
    */
@@ -1665,7 +1665,7 @@ function Sprite(pInst, _x, _y, _w, _h) {
   * @property depth
   * @type {Number}
   * @default One more than the greatest existing sprite depth, when calling
-  *          createSprite().  When calling new Sprite() directly, depth will
+  *          new  Rectangle().  When calling new Sprite() directly, depth will
   *          initialize to 0 (not recommended).
   */
   this.depth = 0;
@@ -4092,10 +4092,10 @@ p5.prototype.createEdgeSprites = function() {
   var width = this._curElement.elt.offsetWidth;
   var height = this._curElement.elt.offsetHeight;
 
-  this.leftEdge = this.createSprite(-edgeThickness / 2, height / 2, edgeThickness, height);
-  this.rightEdge = this.createSprite(width + (edgeThickness / 2), height / 2, edgeThickness, height);
-  this.topEdge = this.createSprite(width / 2, -edgeThickness / 2, width, edgeThickness);
-  this.bottomEdge = this.createSprite(width / 2, height + (edgeThickness / 2), width, edgeThickness);
+  this.leftEdge = this.newRectangle(-edgeThickness / 2, height / 2, edgeThickness, height);
+  this.rightEdge = this.newRectangle(width + (edgeThickness / 2), height / 2, edgeThickness, height);
+  this.topEdge = this.newRectangle(width / 2, -edgeThickness / 2, width, edgeThickness);
+  this.bottomEdge = this.newRectangle(width / 2, height + (edgeThickness / 2), width, edgeThickness);
 
   this.edges = this.createGroup();
   this.edges.add(this.leftEdge);
